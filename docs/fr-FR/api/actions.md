@@ -1,10 +1,10 @@
 # @nocobase/actions
 
-## Overview
+## Vue d'ensemble
 
-The `@nocobase/actions` package encapsulates frequently used CRUD-related methods. By simply registering it with the [ResourceManager](./resourcer/resource-manager), CRUD operation interfaces can be globally added to system resources.
+Le package `@nocobase/actions` encapsule les méthodes liées au CRUD fréquemment utilisées. En l'enregistrant simplement auprès du [ResourceManager](./resourcer/resource-manager), les interfaces d'opération CRUD peuvent être globalement ajoutées aux ressources système.
 
-### Basic Usage
+### Utilisation de base
 
 ```typescript
 import * as actions from `@nocobase/actions`;
@@ -16,11 +16,11 @@ const resourceManager = new ResourceManager({
 resourceManager.registerActionHandlers(actions);
 ```
 
-## Action Methods
+## Méthode d'Action
 
 ### create
 
-Creates a resource. `POST /api/<resource>:create`.
+Crée une ressource. `POST /api/<resource>:create`.
 
 ```shell
 curl "http://localhost:13000/api/users:create" \
@@ -29,54 +29,54 @@ curl "http://localhost:13000/api/users:create" \
   -d '{"username": "admin"}'
 ```
 
-#### Request Body
+#### Corps de la requête
 
-| Parameter Name  | Type  | Description                                     |
-| --------------- | ----- | ----------------------------------------------- |
-| `[key: string]` | `any` | Key-value pairs representing resource fields    |
+| Nom du paramètre  | Type  | Description                                                |
+| ----------------- | ----- | ---------------------------------------------------------- |
+| `[key: string]`   | `any` | Paires clé-valeur représentant les champs de ressources    |
 
 ### list
 
-Retrieves a list of resources. `GET /api/<resource>:list`.
+Récupère une liste de ressources. `GET /api/<resource>:list`.
 
 ```shell
 curl -X GET http://localhost:13000/api/users:list
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter  | Type       | Description                                                        | Default |
-| ---------- | ---------- | ------------------------------------------------------------------ | ------- |
-| `filter`   | `Filter`   | Filtering parameters, see [Filter Operators](./database/operators) | -       |
-| `fields`   | `string[]` | Fields to retrieve                                                 | -       |
-| `except`   | `string[]` | Fields to exclude                                                  | -       |
-| `appends`  | `string[]` | Related fields to append                                           | -       |
-| `sort`     | `string[]` | Sorting parameters                                                 | -       |
-| `paginate` | `boolean`  | Whether to use pagination                                          | `true`  |
-| `page`     | `number`   | Current page number                                                | `1`     |
-| `pageSize` | `number`   | Number of items per page                                           | `20`    |
+| Paramètre  | Type       | Description                                                           | Défaut  |
+| ---------- | ---------- | --------------------------------------------------------------------- | ------- |
+| `filter`   | `Filter`   | Paramètres de filtrage, voir [Filter Operators](./database/operators) | -       |
+| `fields`   | `string[]` | Champs à récupérer                                                    | -       |
+| `except`   | `string[]` | Champs à exclure                                                      | -       |
+| `appends`  | `string[]` | Champs associés à ajouter                                             | -       |
+| `sort`     | `string[]` | Paramètres de tri                                                     | -       |
+| `paginate` | `boolean`  | S'il faut utiliser la pagination                                      | `true`  |
+| `page`     | `number`   | Numéro de page actuel                                                 | `1`     |
+| `pageSize` | `number`   | Nombre d'éléments par page                                            | `20`    |
 
 ### get
 
-Retrieves a specific resource. `GET /api/<resource>:get`.
+Récupère une ressource spécifique. `GET /api/<resource>:get`.
 
 ```shell
 curl -X GET http://localhost:13000/api/users:get?filterByTk=1
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter    | Type               | Description                                                        | Default |
-| ------------ | ------------------ | ------------------------------------------------------------------ | ------- |
-| `filterByTk` | `number \| string` | Filter by primary key value                                        | -       |
-| `filter`     | `Filter`           | Filtering parameters, see [Filter Operators](./database/operators) | -       |
-| `fields`     | `string[]`         | Fields to retrieve                                                 | -       |
-| `except`     | `string[]`         | Fields to exclude                                                  | -       |
-| `appends`    | `string[]`         | Related fields to append                                           | -       |
+| Paramètre    | Type               | Description                                                           | Défaut  |
+| ------------ | ------------------ | --------------------------------------------------------------------- | ------- |
+| `filterByTk` | `number \| string` | Filtrer par valeur de clé primaire                                    | -       |
+| `filter`     | `Filter`           | Paramètres de filtrage, voir [Filter Operators](./database/operators) | -       |
+| `fields`     | `string[]`         | Champs à récupérer                                                    | -       |
+| `except`     | `string[]`         | Champs à exclure                                                      | -       |
+| `appends`    | `string[]`         | Champs associés à ajouter                                             | -       |
 
 ### update
 
-Updates one or more resources. `PUT /api/<resource>:update`.
+Met à jour une ou plusieurs ressources. `PUT /api/<resource>:update`.
 
 ```shell
 curl "http://localhost:13000/api/users:update?filterByTk=1" \
@@ -85,41 +85,41 @@ curl "http://localhost:13000/api/users:update?filterByTk=1" \
   -d '{"username": "admin"}'
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter    | Type               | Description                                                        |
-| ------------ | ------------------ | ------------------------------------------------------------------ |
-| `filter`     | `Filter`           | Filtering parameters, see [Filter Operators](./database/operators) |
-| `filterByTk` | `number \| string` | Filter by primary key value                                        |
+| Paramètre    | Type               | Description                                                              |
+| ------------ | ------------------ | ------------------------------------------------------------------------ |
+| `filter`     | `Filter`           | Paramètres de filtrage, voir [Filter Operators](./database/operators)    |
+| `filterByTk` | `number \| string` | Filtrer par valeur de clé primaire                                       |
 
-*Note: At least one of `filter` or `filterByTk` must be provided.*
+*Remarque : Au moins un des éléments « filter » ou « filterByTk » doit être fourni.*
 
-#### Request Body
+#### Corps de la requête
 
-| Parameter Name  | Type  | Description                                     |
-| --------------- | ----- | ----------------------------------------------- |
-| `[key: string]` | `any` | Key-value pairs representing resource fields    |
+| Nom du paramètre  | Type  | Description                                                 |
+| ----------------- | ----- | ----------------------------------------------------------- |
+| `[key: string]`   | `any` | Paires clé-valeur représentant les champs de ressources     |
 
 ### destroy
 
-Deletes one or more resources. `DELETE /api/<resource>:destroy`.
+Supprime une ou plusieurs ressources. `DELETE /api/<resource>:destroy`.
 
 ```shell
 curl -X DELETE http://localhost:13000/api/users:destroy?filterByTk=1
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter    | Type               | Description                                                        |
-| ------------ | ------------------ | ------------------------------------------------------------------ |
-| `filter`     | `Filter`           | Filtering parameters, see [Filter Operators](./database/operators) |
-| `filterByTk` | `number \| string` | Filter by primary key value                                        |
+| Paramètre    | Type               | Description                                                           |
+| ------------ | ------------------ | --------------------------------------------------------------------- |
+| `filter`     | `Filter`           | Paramètres de filtrage, voir [Filter Operators](./database/operators) |
+| `filterByTk` | `number \| string` | Filtrer par valeur de clé primaire                                    |
 
-*Note: At least one of `filter` or `filterByTk` must be provided.*
+*Remarque : Au moins un des éléments « filter » ou « filterByTk » doit être fourni.*
 
 ### firstOrCreate
 
-Retrieves or creates a resource. `POST /api/<resource>:firstOrCreate`.
+Récupère ou crée une ressource. `POST /api/<resource>:firstOrCreate`.
 
 ```shell
 curl "http://localhost:13000/api/users:firstOrCreate?filterKeys[]=username" \
@@ -128,21 +128,21 @@ curl "http://localhost:13000/api/users:firstOrCreate?filterKeys[]=username" \
   -d '{"username": "admin", "nickname": "Admin"}'
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter    | Type       | Description                                                |
-| ------------ | ---------- | ---------------------------------------------------------- |
-| `filterKeys` | `string[]` | Fields in the request body used to find existing resources |
+| Paramètre    | Type       | Description                                                                      |
+| ------------ | ---------- | -------------------------------------------------------------------------------- |
+| `filterKeys` | `string[]` | Champs du corps de la requête utilisés pour rechercher des ressources existantes |
 
-#### Request Body
+#### Corps de la requête
 
-| Parameter Name  | Type  | Description                                     |
-| --------------- | ----- | ----------------------------------------------- |
-| `[key: string]` | `any` | Key-value pairs representing resource fields    |
+| Nom du paramètre | Type  | Description                                             |
+| ---------------- | ----- | ------------------------------------------------------- |
+| `[key: string]`  | `any` | Paires clé-valeur représentant les champs de ressources |
 
 ### updateOrCreate
 
-Updates or creates a resource. `POST /api/<resource>:updateOrCreate`.
+Met à jour ou crée une ressource. `POST /api/<resource>:updateOrCreate`.
 
 ```shell
 curl "http://localhost:13000/api/users:updateOrCreate?filterKeys[]=username" \
@@ -151,40 +151,40 @@ curl "http://localhost:13000/api/users:updateOrCreate?filterKeys[]=username" \
   -d '{"username": "admin", "nickname": "Admin"}'
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter    | Type       | Description                                                |
-| ------------ | ---------- | ---------------------------------------------------------- |
-| `filterKeys` | `string[]` | Fields in the request body used to find existing resources |
+| Paramètre    | Type       | Description                                                                      |
+| ------------ | ---------- | -------------------------------------------------------------------------------- |
+| `filterKeys` | `string[]` | Champs du corps de la requête utilisés pour rechercher des ressources existantes |
 
-#### Request Body
+#### Corps de la requête
 
-| Parameter Name  | Type  | Description                                     |
-| --------------- | ----- | ----------------------------------------------- |
-| `[key: string]` | `any` | Key-value pairs representing resource fields    |
+| Nom du paramètre   | Type  | Description                                                |
+| ------------------ | ----- | ---------------------------------------------------------- |
+| `[key: string]`    | `any` | Paires clé-valeur représentant les champs de ressources    |
 
 ### move
 
-Moves resources, adjusting the order. Typically used for drag-and-drop sorting in pages. `POST /api/<resource>:move`.
+Déplace les ressources en ajustant l'ordre. Généralement utilisé pour le tri par glisser-déposer dans les pages. `POST /api/<resource>:move`.
 
 ```shell
 curl -X POST "http://localhost:13000/api/users:move?sourceId=1&targetId=2"
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter     | Type                       | Description                                                 | Default |
-| ------------- | -------------------------- | ----------------------------------------------------------- | ------- |
-| `sourceId`    | `targetKey`                | ID of the element to move                                   | -       |
-| `targetId`    | `targetKey`                | ID of the element to swap positions with                    | -       |
-| `sortField`   | `string`                   | Name of the field where sorting is stored                   | `sort`  |
-| `targetScope` | `string`                   | Sorting scope, a resource can be sorted by different scopes | -       |
-| `sticky`      | `boolean`                  | Whether to stick the moved element                          | -       |
-| `method`      | `insertAfter` \| `prepend` | Insertion method: whether to insert before                  |
+| Paramètre     | Type                       | Description                                                            | Défaut  |
+| ------------- | -------------------------- | ---------------------------------------------------------------------- | ------- |
+| `sourceId`    | `targetKey`                | ID de l'élément à déplacer                                             | -       |
+| `targetId`    | `targetKey`                | ID de l'élément avec lequel échanger les positions                     | -       |
+| `sortField`   | `string`                   | Nom du champ où est stocké le tri                                      | `sort`  |
+| `targetScope` | `string`                   | Portée de tri, une ressource peut être triée selon différentes portées | -       |
+| `sticky`      | `boolean`                  | S'il faut coller l'élément déplacé                                     | -       |
+| `method`      | `insertAfter` \| `prepend` | Méthode d'insertion : s'il faut insérer avant                          |
 
 ### set
 
-Sets associated objects for a resource. `POST /api/<resource>/<resourceKey>/<association>:set`.
+Définit les objets associés à une ressource. `POST /api/<resource>/<resourceKey>/<association>:set`.
 
 ```shell
 curl "http://localhost:13000/api/users/1/roles:set" \
@@ -193,13 +193,13 @@ curl "http://localhost:13000/api/users/1/roles:set" \
   -d '["admin", "member"]'
 ```
 
-#### Request Body
+#### Corps de la requête
 
-- `TargetKey | TargetKey[]` - Array of primary key values for associated objects.
+- `TargetKey | TargetKey[]` - Tableau de valeurs de clé primaire pour les objets associés.
 
 ### add
 
-Adds associated objects to a resource. `POST /api/<resource>/<resourceKey>/<association>:add`.
+Ajoute des objets associés à une ressource. `POST /api/<resource>/<resourceKey>/<association>:add`.
 
 ```shell
 curl "http://localhost:13000/api/users/1/roles:add" \
@@ -208,13 +208,13 @@ curl "http://localhost:13000/api/users/1/roles:add" \
   -d '["admin"]'
 ```
 
-#### Request Body
+#### Corps de la requête
 
-- `TargetKey | TargetKey[]` - Array of primary key values for associated objects.
+- `TargetKey | TargetKey[]` - Tableau de valeurs de clé primaire pour les objets associés.
 
 ### remove
 
-Removes associated objects from a resource. `POST /api/<resource>/<resourceKey>/<association>:remove`.
+Supprime les objets associés d'une ressource. `POST /api/<resource>/<resourceKey>/<association>:remove`.
 
 ```shell
 curl "http://localhost:13000/api/users/1/roles:remove" \
@@ -223,13 +223,13 @@ curl "http://localhost:13000/api/users/1/roles:remove" \
   -d '["admin"]'
 ```
 
-#### Request Body
+#### Corps de la requête
 
-- `TargetKey | TargetKey[]` - Array of primary key values for associated objects.
+- `TargetKey | TargetKey[]` - Tableau de valeurs de clé primaire pour les objets associés.
 
 ### toggle
 
-Toggles associated objects for a resource, adding them if they don't exist, or removing them if they do. `POST /api/<resource>/<resourceKey>/<association>:toggle`.
+Bascule les objets associés à une ressource, en les ajoutant s'ils n'existent pas ou en les supprimant s'ils existent. `POST /api/<resource>/<resourceKey>/<association>:toggle`.
 
 ```shell
 curl "http://localhost:13000/api/users/1/roles:toggle" \
@@ -238,6 +238,6 @@ curl "http://localhost:13000/api/users/1/roles:toggle" \
   -d '["admin", "member"]'
 ```
 
-#### Request Body
+#### Corps de la requête
 
-- `TargetKey | TargetKey[]` - Array of primary key values for associated objects.
+- `TargetKey | TargetKey[]` - Tableau de valeurs de clé primaire pour les objets associés.

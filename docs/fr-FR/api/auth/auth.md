@@ -1,8 +1,8 @@
 # Auth
 
-## Overview
+## Vue d'ensemble
 
-`Auth` is an abstract class for user authentication types, defining the interfaces required to complete user authentication. To extend new user authentication types, you need to inherit from the `Auth` class and implement its methods. The basic implementation can be referred to as [BaseAuth](./base-auth.md).
+`Auth` est une classe abstraite pour les types d'authentification utilisateur, définissant les interfaces requises pour compléter l'authentification utilisateur. Pour étendre de nouveaux types d'authentification utilisateur, vous devez hériter de la classe `Auth` et implémenter ses méthodes. L'implémentation de base peut être appelée [BaseAuth](./base-auth.md).
 
 ```ts
 interface IAuth {
@@ -28,11 +28,11 @@ class CustomAuth extends Auth {
 }
 ```
 
-## Instance Properties
+## Propriétés de l'instance
 
 ### `user`
 
-Information of the authenticated user.
+Informations de l'utilisateur authentifié.
 
 #### Signature
 
@@ -42,7 +42,7 @@ Information of the authenticated user.
 
 ### `constructor()`
 
-Constructor, creates an instance of `Auth`.
+Constructoeur, crée une instance de `Auth`.
 
 #### Signature
 
@@ -64,15 +64,15 @@ export type AuthConfig = {
 
 ##### AuthConfig
 
-| Attribute       | Type                                            | Description                                                                                                                 |
-| --------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `authenticator` | [`Authenticator`](./auth-manager#authenticator) | Authenticator data model, the actual type in NocoBase applications is [AuthModel](../../handbook/auth/dev/api.md#authmodel) |
-| `options`       | `Record<string, any>`                           | Authenticator-related configurations                                                                                        |
-| `ctx`           | `Context`                                       | Request context                                                                                                             |
+| Attribut        | Type                                            | Description                                                                                                                               |
+| --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `authenticator` | [`Authenticator`](./auth-manager#authenticator) | Modèle de données Authentificateur, le type réel dans les applications NocoBase est [AuthModel](../../handbook/auth/dev/api.md#authmodel) |
+| `options`       | `Record<string, any>`                           | Configurations liées à l'Authentificateur                                                                                                 |
+| `ctx`           | `Context`                                       | Contexte de la requête                                                                                                                    |
 
 ### `check()`
 
-User authentication, returns user information. This is an abstract method that all authentication types must implement.
+Authentification de l'utilisateur, renvoie les informations de l'utilisateur. Il s'agit d'une méthode abstraite que tous les types d'authentification doivent implémenter.
 
 #### Signature
 
@@ -80,7 +80,7 @@ User authentication, returns user information. This is an abstract method that a
 
 ### `signIn()`
 
-User login.
+Login utilisateur.
 
 #### Signature
 
@@ -88,7 +88,7 @@ User login.
 
 ### `signUp()`
 
-User registration.
+Enregistrement de l'utilisateur.
 
 #### Signature
 
@@ -96,7 +96,7 @@ User registration.
 
 ### `signOut()`
 
-User logout.
+Logout utilisateur
 
 #### Signature
 

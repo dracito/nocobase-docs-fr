@@ -1,10 +1,10 @@
 # AuthManager
 
-## Overview
+## Vue d'ensemble
 
-`AuthManager` is the user authentication management module in NocoBase, used for registering different types of user authentication.
+`AuthManager` est le module de gestion de l'authentification des utilisateurs dans NocoBase, utilisé pour enregistrer différents types d'authentification des utilisateurs.
 
-### Basic Usage
+### Utilisation de base
 
 ```ts
 const authManager = new AuthManager({
@@ -35,11 +35,11 @@ app.resourceManager.use(authManager.middleware());
 - **Authenticator**: An authenticator is a database-stored entity linked to a configuration record for a specific authentication type (`AuthType`). Multiple authenticators can exist for one authentication type, each offering diffrent authentications.
 - **Authenticator name**: Unique identifier for an authenticator, used to determine the current authentication employed by the current request.
 
-## Class Methods
+## Méthodes de classe
 
 ### `constructor()`
 
-Constructor, creates an instance of `AuthManager`.
+Constructeur, crée une instance de `AuthManager`.
 
 #### Signature
 
@@ -64,22 +64,22 @@ export type AuthManagerOptions = {
 
 ##### AuthManagerOptions
 
-| Attribute | Type                        | Description                                                                     | Default           |
-| --------- | --------------------------- | ------------------------------------------------------------------------------- | ----------------- |
-| `authKey` | `string`                    | Optional key to save the current authenticator identifier in the request header | `X-Authenticator` |
-| `default` | `string`                    | Optional, default authenticator identifier                                      | `basic`           |
-| `jwt`     | [`JwtOptions`](#jwtoptions) | Optional, configure if using JWT for authentication                             | -                 |
+| Attribut  | Type                        | Description                                                                                          | Défaut            |
+| --------- | --------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------- |
+| `authKey` | `string`                    | Optionnel, clé pour enregistrer l'identifiant d'authentificateur actuel dans l'en-tête de la requête | `X-Authenticator` |
+| `default` | `string`                    | Optionnel, identifiant d'authentificateur par défaut                                                 | `basic`           |
+| `jwt`     | [`JwtOptions`](#jwtoptions) | Optionnel, configurer si vous utilisez JWT pour l'authentification                                   | -                 |
 
 ##### JwtOptions
 
-| Attribute   | Type     | Description                       | Default           |
-| ----------- | -------- | --------------------------------- | ----------------- |
-| `secret`    | `string` | Token secret key                  | `X-Authenticator` |
-| `expiresIn` | `string` | Optional, token expiration period | `7d`              |
+| Attribut    | Type     | Description                              | Défaut            |
+| ----------- | -------- | ---------------------------------------- | ----------------- |
+| `secret`    | `string` | Clé secrète du jeton                     | `X-Authenticator` |
+| `expiresIn` | `string` | Optionnel, période d'expiration du jeton | `7d`              |
 
 ### `setStorer()`
 
-Set methods for storing and retrieving authenticator data.
+Définissez les méthodes de stockage et de récupération des données d'authentificateur.
 
 #### Signature
 
@@ -99,24 +99,24 @@ export interface Storer {
 }
 ```
 
-#### Details
+#### Détails
 
 ##### Authenticator
 
-| Attribute  | Type                  | Description                          |
-| ---------- | --------------------- | ------------------------------------ |
-| `authType` | `string`              | Authentication type                  |
-| `options`  | `Record<string, any>` | Authenticator-related configurations |
+| Attribut   | Type                  | Description                               |
+| ---------- | --------------------- | ----------------------------------------- |
+| `authType` | `string`              | Type d'authentication                     |
+| `options`  | `Record<string, any>` | Configurations liées à l'authentificateur |
 
 ##### Storer
 
-`Storer` is the interface for authenticator storage, containing one method.
+`Storer` est l'interface pour le stockage de l'authentificateur, contenant une méthode.
 
-- `get(name: string): Promise<Authenticator>` - Get authenticator by identifier. In NocoBase, the actual returned type is [AuthModel](../../handbook/auth/dev/api#authmodel).
+- `get(name: string): Promise<Authenticator>` - Obtenez l'authentificateur par identifiant. Dans NocoBase, le type renvoyé réel est [AuthModel](../../handbook/auth/dev/api#authmodel).
 
 ### `registerTypes()`
 
-Register authentication types.
+Enregistrez les types d'authentification.
 
 #### Signature
 
@@ -133,16 +133,16 @@ type AuthConfig = {
 };
 ```
 
-#### Details
+#### Détails
 
-| Attribute | Type               | Description                                                          |
-| --------- | ------------------ | -------------------------------------------------------------------- |
-| `auth`    | `AuthExtend<Auth>` | Authentication type implementation, refer to [Auth](./auth.md)       |
-| `title`   | `string`           | Optional. Title of the authentication type displayed on the frontend |
+| Attribut  | Type               | Description                                                                  |
+| --------- | ------------------ | ---------------------------------------------------------------------------- |
+| `auth`    | `AuthExtend<Auth>` | Implémentation du type d'authentification, reportez-vous à [Auth](./auth.md) |
+| `title`   | `string`           | Optionnel, titre du type d'authentification affiché sur le frontend          |
 
 ### `listTypes()`
 
-Get a list of registered authentication types.
+Obtenez une liste des types d’authentification enregistrés.
 
 #### Signature
 
@@ -150,26 +150,26 @@ Get a list of registered authentication types.
 
 #### Details
 
-| Attribute | Type     | Description                      |
-| --------- | -------- | -------------------------------- |
-| `name`    | `string` | Authentication type identifier   |
-| `title`   | `string` | Title of the authentication type |
+| Attribut  | Type     | Description                            |
+| --------- | -------- | -------------------------------------- |
+| `name`    | `string` | Identifiant du type d'authentification |
+| `title`   | `string` | Titre du type d'authentification       |
 
 ### `get()`
 
-Get authenticator.
+Obtenez un authentificateur.
 
 #### Signature
 
 - `get(name: string, ctx: Context)`
 
-#### Details
+#### Détails
 
-| Attribute | Type      | Description              |
+| Attribut  | Type      | Description              |
 | --------- | --------- | ------------------------ |
-| `name`    | `string`  | Authenticator identifier |
-| `ctx`     | `Context` | Request context          |
+| `name`    | `string`  | ID de l'authentificateur |
+| `ctx`     | `Context` | Contexte de la requête   |
 
 ### `middleware()`
 
-Authentication middleware. Get the current authenticator and perform user authentication.
+Middleware d’authentification. Obtenez l'authentificateur actuel et effectuez l'authentification de l'utilisateur.

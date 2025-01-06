@@ -1,8 +1,8 @@
 # Cache
 
-## Basic Methods
+## Méthodes de base
 
-You can refer to the documentation of [node-cache-manager](https://github.com/node-cache-manager/node-cache-manager).
+Vous pouvez vous référer à la documentation de [node-cache-manager](https://github.com/node-cache-manager/node-cache-manager).
 
 - `get()`
 - `set()`
@@ -15,11 +15,11 @@ You can refer to the documentation of [node-cache-manager](https://github.com/no
 - `keys()`
 - `ttl()`
 
-## Other Methods
+## Autres méthodes
 
 ### `wrapWithCondition()`
 
-Similar to `wrap()`, but can decide whether to use caching based on conditions.
+Similaire à `wrap()`, mais peut décider d'utiliser ou non la mise en cache en fonction des conditions.
 
 ```ts
 async wrapWithCondition<T>(
@@ -37,7 +37,7 @@ async wrapWithCondition<T>(
 
 ### `setValueInObject()`
 
-When the cached content is an object, changes the value of a specific key.
+Lorsque le contenu mis en cache est un objet, modifie la valeur d'une clé spécifique.
 
 ```ts
 async setValueInObject(key: string, objectKey: string, value: unknown)
@@ -45,7 +45,7 @@ async setValueInObject(key: string, objectKey: string, value: unknown)
 
 ### `getValueInObject()`
 
-When the cached content is an object, retrieves the value of a specific key.
+Lorsque le contenu mis en cache est un objet, récupère la valeur d'une clé spécifique.
 
 ```ts
 async getValueInObject(key: string, objectKey: string)
@@ -53,7 +53,7 @@ async getValueInObject(key: string, objectKey: string)
 
 ### `delValueInObject()`
 
-When the cached content is an object, deletes a specific key.
+Lorsque le contenu mis en cache est un objet, supprime une clé spécifique.
 
 ```ts
 async delValueInObject(key: string, objectKey: string)

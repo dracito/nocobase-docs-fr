@@ -2,14 +2,13 @@
 
 ## Vue d'ensemble
 
-`ACL` est le moduel de gestion des permissions de NocoBase. Il est responsable de la gestion des rôles utilisateurs, de l'enregistrement des permissions et des autorisations. Il évalue aussi la politique de permission et le contrôle des accèss.
+`ACL` est le module de gestion des permissions de NocoBase. Il est responsable de la gestion des rôles utilisateurs, de l'enregistrement des permissions et des autorisations. Il évalue aussi la politique de permission et le contrôle des accèss.
 
 ### Concepts
 
 - **Resource**: Collections, ou ressources personnalisées enregistrées. Se reférer à [`@nocobase/resourcer`](../resourcer/resource-manager.md).
 - **Action**: Une interface d'opération pour une ressource, comme la création, la lecture, la modification, la suppression ou d'autres actions personnalisées. Se reférer à [`@nocobase/actions`](../actions).
 - **Strategy**: Configure des permission globales pour les rôles, comme des permissions pour une opération sur une ressource comme la création, la lecture, la modification, la suppression, l'importation, l'exportation, et les permission système comme configurer l'interface utilisateur.
-- **Snippet**: Defines a collection of operations, enabling unified management of operation permissions. Snippet identifiers can be matched using the [minimatch](https://github.com/isaacs/minimatch) rules.
 - **Snippet**: Définit une collection d'opérations, permettant un gestion unifié de permission sur opération. Les identifiants de Snippet peuvent être associés en utilisant les règles [minimatch](https://github.com/isaacs/minimatch).
 
 ## Méthode de classe
@@ -56,35 +55,35 @@ export interface RoleActionParams {
 
 ##### DefineOptions
 
-| Propriété  | Type                                                                | Description                                                       |
-| ---------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `role`     | `string`                                                            | Unique identifier for the role                                    |
-| `strategy` | `string` \| [`AvailableStrategyOptions`](#availablestrategyoptions) | Optional, global access strategy for the role                     |
-| `actions`  | [`{ [actionName: string]: RoleActionParams; }`](#roleactionparams)  | Optional, permission configuration for actions                    |
-| `snippets` | `string[]`                                                          | Optional, defines snippets that the role has permission to access |
+| Propriété  | Type                                                                | Description                                                                    |
+| ---------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `role`     | `string`                                                            | Identifiant unique pour le rôle                                                |
+| `strategy` | `string` \| [`AvailableStrategyOptions`](#availablestrategyoptions) | Optionnel, Stratégie d'accès global pour le rôle                               |
+| `actions`  | [`{ [actionName: string]: RoleActionParams; }`](#roleactionparams)  | Optionnel, configuration des autorisation pour les actions                     |
+| `snippets` | `string[]`                                                          | Optionnel, définit les snippets pour lesquels le rôle à l'autorisation d'accès |
 
 ##### AvailableStrategyOptions
 
-| Propriété        | Type                              | Description                                               |
-| ---------------- | --------------------------------- | --------------------------------------------------------- |
-| `displayName`    | `string`                          | Optional, display name for the strategy                   |
-| `action`         | `false` \| `string` \| `string[]` | Optional, operation interfaces                            |
-| `allowConfigure` | `boolean`                         | Optional, whether to allow configuring the user interface |
-| `resource`       | `*`                               | Applies to all resources                                  |
+| Propriété        | Type                              | Description                                                                |
+| ---------------- | --------------------------------- | -------------------------------------------------------------------------- |
+| `displayName`    | `string`                          | Optionnel, le nom affiché de la stratégie                                  |
+| `action`         | `false` \| `string` \| `string[]` | Optionnel, les interfaces d'opération                                      |
+| `allowConfigure` | `boolean`                         | Optionnel, s'il faut autoriser la configuration de l'interface utilisateur |
+| `resource`       | `*`                               | S'applique à toutes les ressources                                         |
 
 ##### RoleActionParams
 
-| Propriété   | Type       | Description                                                                                            |
-| ----------- | ---------- | ------------------------------------------------------------------------------------------------------ |
-| `fields`    | `string[]` | Optional, fields of the data table to operate on                                                       |
-| `filter`    | `any`      | Optional, filter parameters that must be met, only records that meet the conditions can be operated on |
-| `own`       | `boolean`  | Optional, whether to operate only on records created by oneself                                        |
-| `whitelist` | `string[]` | Optional, whitelist of fields that can be accessed, only fields in the whitelist can be accessed       |
-| `blacklist` | `string[]` | Optional, blacklist of fields that cannot be accessed, fields in the blacklist cannot be accessed      |
+| Propriété   | Type       | Description                                                                                                                                 |
+| ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fields`    | `string[]` | Optionnel, champs de la table de données sur lesquels opérer                                                                                |
+| `filter`    | `any`      | Optionnel, filtrer les paramètres qui doivent être remplis, seuls les enregistrements qui remplissent les conditions peuvent être exploités |
+| `own`       | `boolean`  | Optionnel, s'il faut opérer uniquement sur des enregistrements créés par soi-même                                                           |
+| `whitelist` | `string[]` | Optionnel, liste blanche des champs accessibles, seuls les champs de la liste blanche sont accessibles                                      |
+| `blacklist` | `string[]` | Optionnel, liste noire des champs inaccessibles, les champs de la liste noire ne sont pas accessibles                                       |
 
 ### `can()`
 
-Determines the permission to execute an action and returns the final action parameters. Returns `null` if no permission.
+Détermine l'autorisation d'exécuter une action et renvoie les paramètres finaux de l'action. Renvoie `null` si aucune autorisation.
 
 #### Signature
 
@@ -112,25 +111,25 @@ interface CanResult {
 
 ##### CanArgs
 
-| Property   | Type     | Description               |
-| ---------- | -------- | ------------------------- |
-| `role`     | `string` | Role identifier           |
-| `resource` | `string` | Resource identifier       |
-| `action`   | `string` | Action identifier         |
-| `ctx`      | `any`    | Optional, request context |
+| Property   | Type     | Description                       |
+| ---------- | -------- | --------------------------------- |
+| `role`     | `string` | Identifiant de rôle               |
+| `resource` | `string` | Identifiant de ressource          |
+| `action`   | `string` | Identifiant d'action              |
+| `ctx`      | `any`    | Optionnel, contexte de la requête |
 
 ##### CanResult
 
-| Property   | Type     | Description                 |
-| ---------- | -------- | --------------------------- |
-| `role`     | `string` | Role identifier             |
-| `resource` | `string` | Resource identifier         |
-| `action`   | `string` | Action identifier           |
-| `params`   | `any`    | Optional, action parameters |
+| Property   | Type     | Description                    |
+| ---------- | -------- | ------------------------------ |
+| `role`     | `string` | Identifiant de rôle            |
+| `resource` | `string` | Identifiant de ressource       |
+| `action`   | `string` | Identifiant d'action           |
+| `params`   | `any`    | Optionnel, paramètres d'action |
 
 ### `registerSnippet()`
 
-Registers a snippet.
+Enregistre un snippet.
 
 #### Signature
 
@@ -149,8 +148,8 @@ export type SnippetOptions = {
 
 | Property  | Type       | Description                                                                                                                              |
 | --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`    | `string`   | Snippet identifier, can be matched using the [minimatch](https://github.com/isaacs/minimatch) rules. E.g., `auth.auth` matches `auth.*`. |
-| `actions` | `string[]` | Resource operations included in the snippet, in the format `resource:action`. E.g., `users:list`.                                        |
+| `name`    | `string`   | Identifiant snippet, peuvent être mis en correspondance en utilisant les règles [minimatch](https://github.com/isaacs/minimatch). Par exemple, `auth.auth` matches `auth.*`. |
+| `actions` | `string[]` | Opérations de ressources incluses dans le snippet, au format `resource:action`. Par exemple, `users:list`.                              |
 
 ### `setAvailableAction()`
 
@@ -174,27 +173,27 @@ export interface AvailableActionOptions {
 
 #### Details
 
-| Property               | Type                   | Description                                                                           |
-| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------- |
-| `displayName`          | `string`               | Optional, display name for the action                                                 |
-| `aliases`              | `string` \| `string[]` | Optional, action aliases. E.g., aliases for `get`, `list` operations are both `view`. |
-| `resource`             | `string`               | Optional, resource                                                                    |
-| `onNewRecord`          | `boolean`              | Optional, whether the operation applies to new data, such as create operation         |
-| `allowConfigureFields` | `boolean`              | Optional, whether to allow configuring fields                                         |
+| Property               | Type                   | Description                                                                                                      |
+| ---------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `displayName`          | `string`               | Optionnel, nom d'affichage de l'action                                                                           |
+| `aliases`              | `string` \| `string[]` | Optionnel, alias d’action. Par exemple, les alias pour les opérations `get` et `list` sont tous deux des `view`. |
+| `resource`             | `string`               | Optionnel, ressource                                                                                             |
+| `onNewRecord`          | `boolean`              | Optionnel, si l'opération s'applique à de nouvelles données, comme une opération de création                     |
+| `allowConfigureFields` | `boolean`              | Optionnel, s'il faut autoriser la configuration des champs                                                       |
 
 ### `setAvailableStrategy()`
 
-Sets allowed strategies for actions.
+Définit les stratégies autorisées pour les actions.
 
 #### Signature
 
 - `setAvailableStrategy(name: string, options: AvailableStrategyOptions)`
 
-Refer to [AvailableStrategyOptions](#availablestrategyoptions).
+Se référer à [AvailableStrategyOptions](#availablestrategyoptions).
 
 ### `allow()`
 
-Defines the conditions under which operations are allowed.
+Définit les conditions dans lesquelles les opérations sont autorisées.
 
 ```typescript
 acl.allow('plugins', '*', 'public');
@@ -212,21 +211,21 @@ export type ConditionFunc = (ctx: any) => Promise<boolean> | boolean;
 
 #### Details
 
-| Parameter      | Type                        | Description                                                                 | Default  |
-| -------------- | --------------------------- | --------------------------------------------------------------------------- | -------- |
-| `resourceName` | `string`                    | Resource                                                                    | -        |
-| `actionNames`  | `string` \| `string[]`      | Action                                                                      | -        |
-| `condition`    | `string` \| `ConditionFunc` | Optional, predefined condition identifier, or condition evaluation function | `public` |
+| Parameter      | Type                        | Description                                                                         | Défaut   |
+| -------------- | --------------------------- | ----------------------------------------------------------------------------------- | -------- |
+| `resourceName` | `string`                    | Ressource                                                                           | -        |
+| `actionNames`  | `string` \| `string[]`      | Action                                                                              | -        |
+| `condition`    | `string` \| `ConditionFunc` | Optionnel, identifiant de condition prédéfini ou fonction d'évaluation de condition | `public` |
 
-Predefined condition identifiers:
+Identifiants de condition prédéfinis :
 
-- `public`: Public interface.
-- `loggedIn`: Allowed when the user is logged in.
-- `allowConfigure`: Allowed when the current user role has permission to configure the user interface.
+- `public`: Interface publique.
+- `loggedIn`: Autorisé quand l'utilisateur est connecté.
+- `allowConfigure`: Autorisé lorsque le rôle d'utilisateur actuel est autorisé à configurer l'interface utilisateur.
 
 ### `addFixedParams()`
 
-Adds fixed parameters to operations, merging them with current request parameters.
+Ajoute des paramètres fixes aux opérations, en les fusionnant avec les paramètres de requête actuels.
 
 ```typescript
 acl.addFixedParams('users', 'list', () => {
@@ -254,13 +253,13 @@ export type Merger = () => object;
 
 | Parameter  | Type     | Description                                               |
 | ---------- | -------- | --------------------------------------------------------- |
-| `resource` | `string` | Resource                                                  |
+| `resource` | `string` | Ressource                                                 |
 | `action`   | `string` | Action                                                    |
-| `merger`   | `Merger` | Function returning the fixed parameter object to be added |
+| `merger`   | `Merger` | Fonction renvoyant l'objet de paramètre fixe à ajouter    |
 
 ### `use()`
 
-Adds the `ACL` middleware.
+Ajoute le middleware `ACL`.
 
 ```typescript
 acl.use(async () => {
@@ -277,8 +276,8 @@ acl.use(async () => {
 
 #### Details
 
-Refer to [Middleware](../../development/server/middleware).
+Se référer à [Middleware](../../development/server/middleware).
 
 ### `middleware()`
 
-NocoBase access control middleware.
+Middleware de contrôle d’accès NocoBase.

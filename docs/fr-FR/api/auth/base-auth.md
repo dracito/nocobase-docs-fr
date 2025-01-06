@@ -1,8 +1,8 @@
 # BaseAuth
 
-## Overview
+## Vue d'ensemble
 
-`BaseAuth` inherits from the abstract class [Auth](./auth.md) and serves as the basic implementation for user authentication types, using JWT as the authentication method. In most cases, extending user authentication types can be achieved by inheriting from `BaseAuth` instead of directly inheriting from the `Auth` abstract class.
+`BaseAuth` hérite de la classe abstraite [Auth](./auth.md) et sert d'implémentation de base pour les types d'authentification utilisateur, en utilisant JWT comme méthode d'authentification. Dans la plupart des cas, l'extension des types d'authentification utilisateur peut être obtenue en héritant de « BaseAuth » au lieu d'hériter directement de la classe abstraite « Auth ».
 
 ```ts
 class BasicAuth extends BaseAuth {
@@ -23,26 +23,26 @@ class BasicAuth extends BaseAuth {
 }
 ```
 
-## Class Methods
+## Méthodes de classe
 
 ### `constructor()`
 
-Constructor, creates an instance of `BaseAuth`.
+Constructeur, crée une instance de `BaseAuth`.
 
 #### Signature
 
 - `constructor(config: AuthConfig & { userCollection: Collection })`
 
-#### Details
+#### Détails
 
-| Parameter        | Type         | Description                                                                                                  |
-| ---------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
-| `config`         | `AuthConfig` | Refer to [Auth - AuthConfig](./auth.md#authconfig)                                                           |
-| `userCollection` | `Collection` | User collection, e.g., `db.getCollection('users')`, refer to [DataBase - Collection](../database/collection) |
+| Paramètre        | Type         | Description                                                                                                                 |
+| ---------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `config`         | `AuthConfig` | Voir [Auth - AuthConfig](./auth.md#authconfig)                                                                              |
+| `userCollection` | `Collection` | Collection des utilisateurs, par exemple, `db.getCollection('users')`, voir [DataBase - Collection](../database/collection) |
 
 ### `user()`
 
-Accessor for setting and getting user information, defaulting to using the `ctx.state.currentUser` object.
+Accesseur pour définir et obtenir des informations sur l'utilisateur, utilisant par défaut l'objet `ctx.state.currentUser`.
 
 #### Signature
 
@@ -51,20 +51,20 @@ Accessor for setting and getting user information, defaulting to using the `ctx.
 
 ### `check()`
 
-Authenticates through the request token and returns user information.
+S'authentifie via le jeton de requête et renvoie les informations utilisateur.
 
 ### `signIn()`
 
-User login, generates a token.
+Connexion utilisateur, génère un jeton.
 
 ### `signUp()`
 
-User registration.
+Inscription des utilisateurs.
 
 ### `signOut()`
 
-User logout, token expiration.
+Déconnexion de l'utilisateur, expiration du jeton.
 
 ### `validate()` \*
 
-Core authentication logic, called by the `signIn` interface, to determine whether the user can successfully log in.
+Logique d'authentification de base, appelée par l'interface « signIn », pour déterminer si l'utilisateur peut se connecter avec succès.
