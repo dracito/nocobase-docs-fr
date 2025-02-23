@@ -36,6 +36,7 @@ export default defineConfig({
   },
   locales: [
     { id: 'en-US', name: 'English' },
+    { id: 'fr-FR', name: 'Français' },
     { id: 'zh-CN', name: '中文' },
     { id: 'ja-JP', name: '日本語' },
   ],
@@ -50,7 +51,7 @@ export default defineConfig({
     })),
     sidebarEnhance: sidebar as any,
     github: 'https://github.com/nocobase/nocobase',
-    footer: '© 2020-2024 NocoBase. All rights reserved.',
+    footer: '© 2020-2025 NocoBase. All rights reserved.',
     alert:
       lang === 'zh-CN'
         ? '文档正在建设中，部分内容可能缺失或缺少翻译，详情查看 <a target="_blank" href="https://github.com/nocobase/docs/commits/main/">文档更新日志</a>'
@@ -58,6 +59,7 @@ export default defineConfig({
     localesEnhance: [
       { id: 'zh-CN', switchPrefix: '中', hostname: 'docs-cn.nocobase.com' },
       { id: 'en-US', switchPrefix: 'en', hostname: 'docs.nocobase.com' },
+      { id: 'fr-FR', switchPrefix: 'fr', hostname: 'docs-fr.nocobase.com' },
       { id: 'ja-JP', switchPrefix: 'ja', hostname: 'docs-ja.nocobase.com' },
     ],
   }),
